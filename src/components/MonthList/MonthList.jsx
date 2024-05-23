@@ -21,12 +21,7 @@ function MonthList() {
 }
 
 const Wrapper = styled.div`
-  display: grid;
-  grid-template-columns: 100px 100px 100px 100px 100px 100px;
-  grid-template-rows: 50px 50px;
-  p {
-    width: 100px;
-  }
+  display: flex;
 `;
 
 export default MonthList;

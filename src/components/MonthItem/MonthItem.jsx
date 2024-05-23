@@ -1,9 +1,17 @@
+import styled from "styled-components";
+
 function MonthItem({ month }) {
   return (
-    <div>
+    <Wrapper>
       <p>{month}월</p>
-    </div>
+    </Wrapper>
   );
 }
+
+const Wrapper = styled.div`
+  background-color: antiquewhite;
+  border-radius: 100px;
+  width: 50px;
+`;
 
 export default MonthItem;
