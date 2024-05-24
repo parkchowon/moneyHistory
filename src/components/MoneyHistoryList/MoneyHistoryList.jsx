@@ -1,9 +1,12 @@
-import MoneyItem from "../MoneyItem/";
+import MoneyItem from "../MoneyItem";
 
-function MoneyHistoryList() {
+function MoneyHistoryList({ moneyDatas }) {
   return (
     <div>
-      <MoneyItem />
+      <div></div>
+      {moneyDatas.map((data) => {
+        return <MoneyItem key={data.id} moneyDatas={data} />;
+      })}
     </div>
   );
 }

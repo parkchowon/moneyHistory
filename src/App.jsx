@@ -12,7 +12,7 @@ function App() {
         </Header>
         <Routes>
           <Route path="/" element={<MainPage />}></Route>
-          <Route path="/details/" element={<DetailPage />}></Route>
+          <Route path="/details/:detailId" element={<DetailPage />}></Route>
         </Routes>
       </BrowserRouter>
     </Wrapper>
@@ -28,13 +28,16 @@ const Wrapper = styled.div`
 
 const Header = styled.div`
   width: 100%;
-  height: 70px;
+  height: 140px;
   display: flex;
   justify-content: center;
   align-items: center;
+
   p {
     font-size: 30px;
     text-align: center;
+    font-family: "Quicksand", sans-serif;
+    font-weight: 800;
   }
 `;
 export default App;

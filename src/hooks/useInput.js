@@ -7,7 +7,10 @@ const useInput = (init) => {
     setValue(e.target.value);
   };
 
-  return [value, handleInput];
+  const setBlank = () => {
+    setValue("");
+  };
+  return [value, handleInput, setBlank];
 };
 
 export default useInput;
