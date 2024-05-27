@@ -7,8 +7,6 @@ import MonthList from "../../components/MonthList/MonthList";
 import useInput from "../../hooks/useInput";
 
 function MainPage() {
-  const [monthList, setMonthList] = useState([]);
-  const [checkedmonth, setCheckedmonth] = useState([]);
   //날짜 초기값
   const today = new Date().toISOString().slice(0, 10);
   //Input값 저장
@@ -17,7 +15,18 @@ function MainPage() {
   const [amount, amountHandler, setAmountBlank] = useInput("");
   const [detail, detailHandler, setDetailBlank] = useInput("");
   //소비한 내역 저장하는 배열
-  const [moneyDatas, setMoneyDatas] = useState([]);
+  const [moneyDatas, setMoneyDatas] = useState(() => {
+    const moneylist = JSON.parse(localStorage.getItem("moneylist"));
+    if (moneylist !== null) {
+      return moneylist;
+    } else {
+      return [];
+    }
+  });
+
+  const [monthList, setMonthList] = useState([]);
+  const [checkedmonth, setCheckedmonth] = useState([]);
+
   //유효성 검사 실패시 문구
   const [failText, setFailText] = useState("");
 
@@ -29,6 +38,7 @@ function MainPage() {
       const filteredDatas = moneyDatas.filter((data) => {
         return `${data.date.split("-")[1]}` == id;
       });
+      localStorage.setItem("moneylist", JSON.stringify(moneyDatas));
       setCheckedmonth([...filteredDatas]);
     }
   }, [moneyDatas]);
@@ -50,7 +60,7 @@ function MainPage() {
       setFailText("지출 내용을 입력해주세요.");
     } else {
       //돈 내역 list에 추가하기
-      setMoneyDatas([
+      const newMoneyList = [
         ...moneyDatas,
         {
           id: v4(),
@@ -59,7 +69,8 @@ function MainPage() {
           amount: value.amount,
           detail: value.detail,
         },
-      ]);
+      ];
+      setMoneyDatas(newMoneyList);
       //선택한 달 바꿔주기
       chickedMonth(value.date.split("-")[1]);
       console.log("등록: ", moneyDatas);
@@ -75,8 +86,9 @@ function MainPage() {
   //월별 객체 배열 만들기
   const months = useMemo(() => {
     let month = [];
+    const checkedMonth = JSON.parse(localStorage.getItem("month"));
     for (let m = 0; m < 12; m++) {
-      if (today.split("-")[1] == m + 1) {
+      if (checkedMonth == m + 1) {
         month.push({ month: m, isClicked: true });
         continue;
       }
@@ -88,7 +100,11 @@ function MainPage() {
   //months가 바뀔때 monthList 값변경
   useEffect(() => {
     setMonthList([...months]);
-    console.log(months);
+    const localMonth = JSON.parse(localStorage.getItem("month"));
+    const filteredDatas = moneyDatas.filter((data) => {
+      return `${data.date.split("-")[1]}` == localMonth;
+    });
+    setCheckedmonth([...filteredDatas]);
   }, [months]);
 
   //월 클릭 시
@@ -97,7 +113,7 @@ function MainPage() {
     const filteredDatas = moneyDatas.filter((data) => {
       return `${data.date.split("-")[1]}` == id;
     });
-
+    localStorage.setItem("month", id);
     setCheckedmonth([...filteredDatas]);
   };
 

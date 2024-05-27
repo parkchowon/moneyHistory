@@ -4,7 +4,7 @@ import styled from "styled-components";
 function MoneyItem({ moneyDatas }) {
   return (
     <Wrapper>
-      <Link to={`/detail/${moneyDatas.id}`}>
+      <Link to={`/details/${moneyDatas.id}`}>
         <div>
           <p className="date">{moneyDatas.date}</p>
           <div>
@@ -61,6 +61,10 @@ const Wrapper = styled.div`
     position: absolute;
     left: 120px;
     font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 70%;
   }
 
   .amount {
