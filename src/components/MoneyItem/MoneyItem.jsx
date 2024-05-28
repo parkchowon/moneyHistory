@@ -3,8 +3,14 @@ import styled from "styled-components";
 
 function MoneyItem({ moneyDatas }) {
   return (
-    <Wrapper>
-      <Link to={`/details/${moneyDatas.id}`}>
+    <Link
+      style={{
+        color: "inherit",
+        textDecoration: "none",
+      }}
+      to={`/details/${moneyDatas.id}`}
+    >
+      <Wrapper>
         <div>
           <p className="date">{moneyDatas.date}</p>
           <div>
@@ -13,8 +19,8 @@ function MoneyItem({ moneyDatas }) {
             <p className="amount">{moneyDatas.amount}원</p>
           </div>
         </div>
-      </Link>
-    </Wrapper>
+      </Wrapper>
+    </Link>
   );
 }
 
@@ -22,13 +28,16 @@ const Wrapper = styled.div`
   cursor: pointer;
   width: 750px;
   height: 40px;
-  margin: 10px 0;
+  margin: 15px 0;
   box-shadow: 0 0 5px gainsboro;
   padding: 20px 35px;
   border-radius: 20px;
   display: flex;
   align-items: center;
-
+  &:hover {
+    transform: scale(1.03);
+    transition: all 0.3s;
+  }
   div {
     display: flex;
     flex-direction: column;

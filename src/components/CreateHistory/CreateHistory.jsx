@@ -83,9 +83,16 @@ const Wrapper = styled.div`
       border-radius: 20px;
       padding: 7px 18px;
       font-size: 15px;
+      font-family: "IBM Plex Sans KR", sans-serif;
+      font-style: normal;
+
       &:focus {
         outline: none;
       }
+    }
+
+    select {
+      height: 37px;
     }
   }
   form > p {

@@ -1,10 +1,10 @@
+import CreateHistory from "@/components/CreateHistory";
+import MoneyHistoryList from "@/components/MoneyHistoryList";
+import MonthList from "@/components/MonthList/MonthList";
+import useInput from "@/hooks/useInput";
 import { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 import { v4 } from "uuid";
-import CreateHistory from "../../components/CreateHistory";
-import MoneyHistoryList from "../../components/MoneyHistoryList";
-import MonthList from "../../components/MonthList/MonthList";
-import useInput from "../../hooks/useInput";
 
 function MainPage() {
   //날짜 초기값
@@ -32,7 +32,6 @@ function MainPage() {
 
   //moneyDatas 바뀌면 list 리렌더링
   useEffect(() => {
-    console.log("useEffect: ", moneyDatas);
     if (moneyDatas.length !== 0) {
       const id = moneyDatas[moneyDatas.length - 1].date.split("-")[1];
       const filteredDatas = moneyDatas.filter((data) => {
@@ -73,7 +72,6 @@ function MainPage() {
       setMoneyDatas(newMoneyList);
       //선택한 달 바꿔주기
       chickedMonth(value.date.split("-")[1]);
-      console.log("등록: ", moneyDatas);
       //input 빈칸으로 바꾸기
       setAmountBlank();
       setDetailBlank();

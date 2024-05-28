@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import styled from "styled-components";
 import DetailPage from "./pages/DetailPage";
 import MainPage from "./pages/MainPage/MainPage";
@@ -8,8 +8,11 @@ function App() {
     <Wrapper>
       <BrowserRouter>
         <Header>
-          <p>Money History</p>
+          <Link to={"/"}>
+            <p>Money History</p>
+          </Link>
         </Header>
+
         <Routes>
           <Route path="/" element={<MainPage />}></Route>
           <Route path="/details/:detailId" element={<DetailPage />}></Route>
@@ -32,12 +35,21 @@ const Header = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 
   p {
     font-size: 30px;
     text-align: center;
     font-family: "Quicksand", sans-serif;
     font-weight: 800;
+    &:hover {
+      transform: scale(1.1);
+      transition: all 0.3s;
+    }
   }
 `;
 export default App;

@@ -91,6 +91,10 @@ video {
   font-family: "IBM Plex Sans KR", sans-serif;
   font-style: normal;
 }
+button {
+  font-family: "IBM Plex Sans KR", sans-serif;
+  font-style: normal;
+}
 /* HTML5 display-role reset for older browsers */
 article,
 aside,
