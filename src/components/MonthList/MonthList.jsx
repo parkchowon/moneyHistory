@@ -1,8 +1,10 @@
+import { useContext } from "react";
 import styled from "styled-components";
+import { MoneyContext } from "../../contexts/moneyContext";
 import MonthItem from "../MonthItem/";
 
-function MonthList(props) {
-  const { monthList, handleClickBtn } = props;
+function MonthList() {
+  const { monthList, handleClickBtn } = useContext(MoneyContext);
 
   return (
     <Wrapper>

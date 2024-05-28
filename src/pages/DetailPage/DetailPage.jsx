@@ -1,13 +1,16 @@
 import Modal from "@/components/Modal";
 import useRefInput from "@/hooks/useRefInput";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
+import { MoneyContext } from "../../contexts/moneyContext";
 
 function DetailPage() {
   const param = useParams();
   const navigate = useNavigate();
 
+  //contextAPI
+  const { updateMoneyList } = useContext(MoneyContext);
   //모달창 여닫힘 여부
   const [isOpen, setIsOpen] = useState(false);
 
@@ -61,6 +64,7 @@ function DetailPage() {
       const changeLocal = localStorages.map((item) => {
         return item.id === param.detailId ? changeDetail : item;
       });
+      updateMoneyList(changeLocal);
       localStorage.setItem("moneylist", JSON.stringify(changeLocal));
       navigate("/");
     }
@@ -78,6 +82,7 @@ function DetailPage() {
     const changeLocal = localStorages.filter((item) => {
       return item.id !== param.detailId;
     });
+    updateMoneyList(changeLocal);
     localStorage.setItem("moneylist", JSON.stringify(changeLocal));
     navigate("/");
   };

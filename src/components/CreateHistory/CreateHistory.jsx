@@ -1,16 +1,34 @@
+import { useContext } from "react";
 import styled from "styled-components";
+import { MoneyContext } from "../../contexts/moneyContext";
 
-function CreateHistory(input) {
+function CreateHistory() {
+  const { date, category, amount, detail, failText } = useContext(MoneyContext);
+  const {
+    dateHandler,
+    categoryHandler,
+    amountHandler,
+    detailHandler,
+    handleCreateHistory,
+  } = useContext(MoneyContext);
+
+  const newMoneyItem = {
+    date,
+    category,
+    amount,
+    detail,
+  };
+
   return (
     <Wrapper>
       <form>
         <div>
           <p>날짜</p>
-          <input value={input.date} onChange={input.dateHandler} type="date" />
+          <input value={date} onChange={dateHandler} type="date" />
         </div>
         <div>
           <p>항목</p>
-          <SelectInput value={input.category} onChange={input.categoryHandler}>
+          <SelectInput value={category} onChange={categoryHandler}>
             <option value="식비">식비</option>
             <option value="미용">미용</option>
             <option value="여행">여행</option>
@@ -23,8 +41,8 @@ function CreateHistory(input) {
         <div>
           <p>금액</p>
           <input
-            value={input.amount}
-            onChange={input.amountHandler}
+            value={amount}
+            onChange={amountHandler}
             type="text"
             placeholder="지출 금액"
           />
@@ -32,18 +50,18 @@ function CreateHistory(input) {
         <div>
           <p>내용</p>
           <input
-            value={input.detail}
-            onChange={input.detailHandler}
+            value={detail}
+            onChange={detailHandler}
             type="text"
             placeholder="지출 내용"
           />
         </div>
-        <button onClick={(e) => input.handleCreateHistory(input, e)}>
+        <button onClick={(e) => handleCreateHistory(newMoneyItem, e)}>
           저장
         </button>
       </form>
       <WarnningText>
-        <p>{input.failText}</p>
+        <p>{failText}</p>
       </WarnningText>
     </Wrapper>
   );

@@ -1,10 +1,14 @@
+import { useContext } from "react";
+import { MoneyContext } from "../../contexts/moneyContext";
 import MoneyItem from "../MoneyItem";
 
-function MoneyHistoryList({ moneyDatas }) {
+function MoneyHistoryList() {
+  const { checkedmonth } = useContext(MoneyContext);
+
   return (
     <div>
       <div></div>
-      {moneyDatas.map((data) => {
+      {checkedmonth.map((data) => {
         return <MoneyItem key={data.id} moneyDatas={data} />;
       })}
     </div>

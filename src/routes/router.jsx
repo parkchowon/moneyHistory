@@ -17,7 +17,12 @@ const router = createBrowserRouter([
       },
       {
         path: "/details/:detailId",
-        element: <DetailPage />,
+        element: (
+          <>
+            <Header />
+            <DetailPage />
+          </>
+        ),
       },
     ],
   },
