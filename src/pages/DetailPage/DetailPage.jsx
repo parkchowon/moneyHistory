@@ -1,16 +1,20 @@
 import Modal from "@/components/Modal";
 import useRefInput from "@/hooks/useRefInput";
-import { useContext, useState } from "react";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
-import { MoneyContext } from "../../contexts/moneyContext";
+import {
+  deleteMoneyList,
+  updateMoneyList,
+} from "../../redux/reducers/money.reducer";
 
 function DetailPage() {
   const param = useParams();
   const navigate = useNavigate();
 
-  //contextAPI
-  const { updateMoneyList } = useContext(MoneyContext);
+  const dispatch = useDispatch();
+
   //모달창 여닫힘 여부
   const [isOpen, setIsOpen] = useState(false);
 
@@ -64,7 +68,7 @@ function DetailPage() {
       const changeLocal = localStorages.map((item) => {
         return item.id === param.detailId ? changeDetail : item;
       });
-      updateMoneyList(changeLocal);
+      dispatch(updateMoneyList(changeLocal)); //dispatch;
       localStorage.setItem("moneylist", JSON.stringify(changeLocal));
       navigate("/");
     }
@@ -82,7 +86,7 @@ function DetailPage() {
     const changeLocal = localStorages.filter((item) => {
       return item.id !== param.detailId;
     });
-    updateMoneyList(changeLocal);
+    dispatch(deleteMoneyList(changeLocal));
     localStorage.setItem("moneylist", JSON.stringify(changeLocal));
     navigate("/");
   };

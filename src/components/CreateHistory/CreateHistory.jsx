@@ -1,22 +1,60 @@
-import { useContext } from "react";
+import useInput from "@/hooks/useInput";
+import { addMoneyList } from "@/redux/reducers/money.reducer";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { MoneyContext } from "../../contexts/moneyContext";
+import { v4 } from "uuid";
 
 function CreateHistory() {
-  const { date, category, amount, detail, failText } = useContext(MoneyContext);
-  const {
-    dateHandler,
-    categoryHandler,
-    amountHandler,
-    detailHandler,
-    handleCreateHistory,
-  } = useContext(MoneyContext);
+  const dispatch = useDispatch();
+  const moneyLists = useSelector((state) => state.money.moneys);
 
+  //날짜 초기값
+  const today = new Date().toISOString().slice(0, 10);
+  //Input값 저장
+  const [date, dateHandler] = useInput(today);
+  const [category, categoryHandler] = useInput("식비");
+  const [amount, amountHandler, setAmountBlank] = useInput("");
+  const [detail, detailHandler, setDetailBlank] = useInput("");
+
+  //warning message
+  const [warningText, setWarningText] = useState("");
+
+  //저장한 값의 연도
+  const year = date.split("-");
+  //현재 연도
+  const todayYear = new Date().getFullYear();
+  //입력한 값 객체로
   const newMoneyItem = {
+    id: v4(),
     date,
     category,
     amount,
     detail,
+  };
+
+  useEffect(() => {
+    localStorage.setItem("moneylist", JSON.stringify(moneyLists));
+  }, [moneyLists]);
+
+  const handleCreateHistory = (e) => {
+    e.preventDefault();
+
+    if (amount === "") {
+      setWarningText("금액을 입력해주세요.");
+    } else if (year[0] < 2000 || year[0] > todayYear) {
+      setWarningText("연도를 올바르게 입력해주세요.");
+    } else if (!+amount) {
+      setWarningText("금액에는 숫자를 입력해주세요.");
+    } else if (detail === "") {
+      setWarningText("지출 내용을 입력해주세요.");
+    } else {
+      dispatch(addMoneyList(newMoneyItem, year[1]));
+      localStorage.setItem("month", year[1]);
+      setAmountBlank();
+      setDetailBlank();
+      setWarningText("");
+    }
   };
 
   return (
@@ -56,12 +94,10 @@ function CreateHistory() {
             placeholder="지출 내용"
           />
         </div>
-        <button onClick={(e) => handleCreateHistory(newMoneyItem, e)}>
-          저장
-        </button>
+        <button onClick={(e) => handleCreateHistory(e)}>저장</button>
       </form>
       <WarnningText>
-        <p>{failText}</p>
+        <p>{warningText}</p>
       </WarnningText>
     </Wrapper>
   );

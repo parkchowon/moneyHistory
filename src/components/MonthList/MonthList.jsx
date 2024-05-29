@@ -1,22 +1,21 @@
-import { useContext } from "react";
+import { useMemo } from "react";
 import styled from "styled-components";
-import { MoneyContext } from "../../contexts/moneyContext";
 import MonthItem from "../MonthItem/";
 
 function MonthList() {
-  const { monthList, handleClickBtn } = useContext(MoneyContext);
+  //월별 객체 배열 만들기
+  const months = useMemo(() => {
+    let month = [];
+    for (let m = 0; m < 12; m++) {
+      month.push({ month: m });
+    }
+    return month;
+  }, []);
 
   return (
     <Wrapper>
-      {monthList.map((item) => {
-        return (
-          <MonthItem
-            key={item.month}
-            month={item.month + 1}
-            isClicked={item.isClicked}
-            handleClickBtn={handleClickBtn}
-          />
-        );
+      {months.map((item) => {
+        return <MonthItem key={item.month} month={item.month + 1} />;
       })}
     </Wrapper>
   );
