@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+import { BsExclamationCircle } from "react-icons/bs";
 import { useSelector } from "react-redux";
+import styled from "styled-components";
 import MoneyItem from "../MoneyItem";
 
 function MoneyHistoryList() {
@@ -29,12 +31,30 @@ function MoneyHistoryList() {
 
   return (
     <div>
-      <div></div>
-      {checkedmonth.map((data) => {
-        return <MoneyItem key={data.id} moneyDatas={data} />;
-      })}
+      {checkedmonth.length !== 0 ? (
+        checkedmonth.map((data) => {
+          return <MoneyItem key={data.id} moneyDatas={data} />;
+        })
+      ) : (
+        <NotExistDiv>
+          <BsExclamationCircle size={40} color="gray" />
+          <p>{month}월 소비 내역이 없습니다.</p>
+        </NotExistDiv>
+      )}
     </div>
   );
 }
 
+const NotExistDiv = styled.div`
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  p {
+    margin-top: 20px;
+    font-size: 25px;
+  }
+`;
 export default MoneyHistoryList;
