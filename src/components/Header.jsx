@@ -6,7 +6,7 @@ function Header() {
     <HeaderDiv>
       <Link to={"/moneyHistory"}>
         <div>
-          <img src="src\styles\logo.png" />
+          <img src="src\images\logo.png" />
           <p>Money History</p>
         </div>
       </Link>
