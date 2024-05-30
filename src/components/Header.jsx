@@ -5,7 +5,10 @@ function Header() {
   return (
     <HeaderDiv>
       <Link to={"/"}>
-        <p>Money History</p>
+        <div>
+          <img src="src\styles\logo.png" />
+          <p>Money History</p>
+        </div>
       </Link>
     </HeaderDiv>
   );
@@ -16,6 +19,15 @@ const HeaderDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  div {
+    display: flex;
+    flex-direction: row;
+    &:hover {
+      transform: scale(1.1);
+      transition: all 0.3s;
+    }
+  }
   cursor: pointer;
   a {
     color: inherit;
@@ -26,11 +38,8 @@ const HeaderDiv = styled.div`
     font-size: 30px;
     text-align: center;
     font-family: "Quicksand", sans-serif;
+    margin: 0 10px;
     font-weight: 800;
-    &:hover {
-      transform: scale(1.1);
-      transition: all 0.3s;
-    }
   }
 `;
 export default Header;
