@@ -7,7 +7,7 @@ const router = createBrowserRouter([
   {
     children: [
       {
-        path: "/",
+        path: "/moneyHistory",
         element: (
           <>
             <Header />
@@ -16,7 +16,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/details/:detailId",
+        path: "/moneyHistory/details/:detailId",
         element: (
           <>
             <Header />
