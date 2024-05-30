@@ -5,7 +5,7 @@ import router from "./routes/router";
 function App() {
   return (
     <Wrapper>
-      <RouterProvider basename="/moneyHistory" router={router} />
+      <RouterProvider router={router} />
     </Wrapper>
   );
 }
