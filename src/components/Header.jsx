@@ -4,7 +4,7 @@ import styled from "styled-components";
 function Header() {
   return (
     <HeaderDiv>
-      <Link to={"/"}>
+      <Link to={"/moneyHistory"}>
         <div>
           <img src="src\styles\logo.png" />
           <p>Money History</p>

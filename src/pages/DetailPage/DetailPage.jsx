@@ -70,7 +70,7 @@ function DetailPage() {
       });
       dispatch(updateMoneyList(changeLocal)); //dispatch;
       localStorage.setItem("moneylist", JSON.stringify(changeLocal));
-      navigate("/");
+      navigate("/moneyHistory");
     }
   };
 
@@ -88,7 +88,7 @@ function DetailPage() {
     });
     dispatch(deleteMoneyList(changeLocal));
     localStorage.setItem("moneylist", JSON.stringify(changeLocal));
-    navigate("/");
+    navigate("/moneyHistory");
   };
 
   return (

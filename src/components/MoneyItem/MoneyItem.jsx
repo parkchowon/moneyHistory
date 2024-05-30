@@ -8,7 +8,7 @@ function MoneyItem({ moneyDatas }) {
         color: "inherit",
         textDecoration: "none",
       }}
-      to={`/details/${moneyDatas.id}`}
+      to={`details/${moneyDatas.id}`}
     >
       <Wrapper>
         <div>

@@ -7,7 +7,7 @@ const router = createBrowserRouter([
   {
     children: [
       {
-        path: "/moneyHistory",
+        path: "/moneyHistory/",
         element: (
           <>
             <Header />
